@@ -40,7 +40,7 @@ y = 0.8*sin.(2pi*(1:S÷2)*660/S)
 sound(x, S) # specify sampling rate
 sound(y) # use default sampling rate of 8192 Hz
 sound([x y]) # stereo
-soundsc([x, y], S) # scale to maximum volume
+soundsc([x y], S) # scale to maximum volume
 ```
 
 See the
