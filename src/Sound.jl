@@ -1,3 +1,7 @@
+"""
+    Sound
+Module that exports the `sound` method.
+"""
 module Sound
 
 using PortAudio
