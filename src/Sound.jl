@@ -7,7 +7,7 @@ module Sound
 using PortAudio
 using SampledSignals
 
-export sound
+export sound, soundsc
 
 
 """
@@ -42,6 +42,27 @@ at default sampling rate 8192 samples per second
 through default audio output device using the `PortAudio` package.
 """
 sound(x::AbstractArray) = sound(x, 8192)
+
+
+"""
+    soundsc(x, S::Real)
+Play mono or stereo audio signal `x`
+at sampling rate `S` samples per second
+through default audio output device using the `PortAudio` package,
+after scaling `x` to have values in `(-1,1)`.
+"""
+soundsc(x::AbstractArray, S::Real) =
+    sound(x * prevfloat(1.0) / maximum(abs, x), S)
+
+
+"""
+    soundsc(x)
+Play mono or stereo audio signal `x`
+at default sampling rate 8192 samples per second
+through default audio output device using the `PortAudio` package,
+after scaling `x` to have values in `(-1,1)`.
+"""
+soundsc(x::AbstractArray) = soundsc(x, 8192)
 
 
 end # module
