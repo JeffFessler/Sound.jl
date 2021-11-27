@@ -10,11 +10,17 @@ https://github.com/JeffFessler/Sound.jl
 [![docs-dev][docs-dev-img]][docs-dev-url]
 [![code-style][code-blue-img]][code-blue-url]
 
-This Julia repo exports the function `sound`
-that plays an audio signal through a computer's speakers.
-Its usage is designed to be similar to that of
-[Matlab's `sound` command](https://www.mathworks.com/help/matlab/ref/sound.html)
-to facilitate migration.
+This Julia repo exports the functions
+`sound`
+and
+`soundsc`
+that play an audio signal through a computer's speakers.
+Their use is designed to be similar to that of Matlab commands
+[`sound`](https://www.mathworks.com/help/matlab/ref/sound.html)
+and
+[`soundsc`](https://www.mathworks.com/help/matlab/ref/soundsc.html)
+to facilitate code migration.
+
 
 ## Getting started
 
@@ -29,11 +35,12 @@ Pkg.add("Sound")
 ```julia
 using Sound
 S = 8192 # sampling rate in Hz
-x = cos.(2pi*(1:S÷2)*440/S)
-y = sin.(2pi*(1:S÷2)*660/S)
+x = 0.7*cos.(2pi*(1:S÷2)*440/S)
+y = 0.8*sin.(2pi*(1:S÷2)*660/S)
 sound(x, S) # specify sampling rate
 sound(y) # use default sampling rate of 8192 Hz
 sound([x y]) # stereo
+soundsc([x y], S) # scale to maximum volume
 ```
 
 See the

@@ -8,6 +8,6 @@ PortAudio = "80ea8bcb-4634-5cb3-8ee8-a132660d1d2d"
 SampledSignals = "bd7594eb-a658-542f-9e75-4c4d8908c167"
 
 [compat]
-julia = "1.6"
 PortAudio = "1.1"
 SampledSignals = "2.1"
+julia = "1.6"

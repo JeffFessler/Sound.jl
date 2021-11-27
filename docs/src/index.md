@@ -13,13 +13,19 @@ CurrentModule = Sound
 
 The Julia module
 [`Sound.jl`](https://github.com/JeffFessler/Sound.jl)
-exports a function `sound`
+exports the functions
+`sound`
+and
+`soundsc`
 for playing an audio signal
 through a computer audio output.
 
-Its usage is designed to be similar to that of
-[Matlab's `sound` command](https://www.mathworks.com/help/matlab/ref/sound.html)
-to facilitate migration.
+Their use is designed to be similar to Matlab commands
+[`sound`](https://www.mathworks.com/help/matlab/ref/sound.html)
+and
+[`soundsc`](https://www.mathworks.com/help/matlab/ref/soundsc.html)
+to facilitate code migration.
+
 
 ## Getting started
 
@@ -28,21 +34,16 @@ using Pkg
 Pkg.add("Sound")
 ```
 
+
 ## Example
 
 ```julia
 using Sound
 S = 8192 # sampling rate in Hz
-x = cos.(2pi*(1:S÷2)*440/S)
-y = sin.(2pi*(1:S÷2)*660/S)
+x = 0.6 * cos.(2pi*(1:S÷2)*440/S)
+y = 0.7 * sin.(2pi*(1:S÷2)*660/S)
 sound(x, S) # specify sampling rate
 sound(y) # use default sampling rate of 8192 Hz
 sound([x y]) # stereo
+soundsc([x y], S) # scale to maximum volume
 ```
-
-Matlab also has a
-[`soundsc`](https://www.mathworks.com/help/matlab/ref/soundsc.html)
-command
-that scales the audio;
-such scaling is already built into `sound` here,
-so `soundsc` is unnecessary.
