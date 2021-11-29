@@ -37,10 +37,9 @@ using Sound
 S = 8192 # sampling rate in Hz
 x = 0.7*cos.(2pi*(1:S÷2)*440/S)
 y = 0.8*sin.(2pi*(1:S÷2)*660/S)
-sound(x, S) # specify sampling rate
-sound(y) # use default sampling rate of 8192 Hz
-sound([x y]) # stereo
-soundsc([x y], S) # scale to maximum volume
+sound(x, S) # monophonic
+sound([x y], S) # stereo
+soundsc([x y], S) # scale to unit amplitude
 ```
 
 See the
@@ -79,8 +78,14 @@ Tested with Julia ≥ 1.6.
 
 ### Related packages
 
+* https://github.com/haberdashPI/SignalBase.jl
+  supports a `framerate` method that serves as the default sampling rate here.
+* https://github.com/haberdashPI/SignalOperators.jl
+  has useful audio processing operations.
 * https://github.com/dancasimiro/WAV.jl
   has a similar `wavplay` function
+* https://github.com/JuliaAudio
+  has a collection of audio packages.
 * https://github.com/JuliaAudio/PortAudio.jl  
   Currently, the `sound` function here is just a wrapper
   around functions in this package.
