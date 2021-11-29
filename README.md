@@ -79,13 +79,13 @@ Tested with Julia ≥ 1.6.
 
 * https://github.com/dancasimiro/WAV.jl
   has a similar `wavplay` function
-* https://github.com/JuliaAudio/PortAudio.jl
+* https://github.com/JuliaAudio/PortAudio.jl  
   Currently, the `sound` function here is just a wrapper
   around functions in this package.
   However that could change in the future
   to support other audio back-ends,
   much like how
-  `Plots.jl`
+  [`Plots.jl`](https://github.com/JuliaPlots/Plots.jl)
   provides a common interface to various plotting back-ends.
 
 
