@@ -5,7 +5,7 @@ Module that exports the `sound` method.
 module Sound
 
 using PortAudio
-using SampledSignals
+using SampledSignals: write, SampleBuf
 
 export sound, soundsc
 
@@ -63,6 +63,23 @@ through default audio output device using the `PortAudio` package,
 after scaling `x` to have values in `(-1,1)`.
 """
 soundsc(x::AbstractArray) = soundsc(x, 8192)
+
+
+"""
+    sound(sb:SampleBuf)
+Play audio signal `sb` of type `SampleBuf`
+through default audio output device using the `PortAudio` package.
+"""
+sound(sb::SampleBuf) = sound(sb.data, sb.samplerate)
+
+
+"""
+    soundsc(sb:SampleBuf)
+Play audio signal `sb` of type `SampleBuf`
+through default audio output device using the `PortAudio` package,
+after scaling the data to have values in `(-1,1)`.
+"""
+soundsc(sb::SampleBuf) = soundsc(sb.data, sb.samplerate)
 
 
 end # module
