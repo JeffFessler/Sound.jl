@@ -4,8 +4,8 @@ Module that exports the `sound` method.
 """
 module Sound
 
-using PortAudio
-using SampledSignals: write, SampleBuf
+using PortAudio: PortAudioStream, write
+using Requires: @require
 
 export sound, soundsc
 
@@ -48,21 +48,9 @@ soundsc(x::AbstractArray, S::Real = 8192) =
     sound(x * prevfloat(1.0) / maximum(abs, x), S)
 
 
-"""
-    sound(sb:SampleBuf)
-Play audio signal `sb` of type `SampleBuf`
-through default audio output device using the `PortAudio` package.
-"""
-sound(sb::SampleBuf) = sound(sb.data, sb.samplerate)
-
-
-"""
-    soundsc(sb:SampleBuf)
-Play audio signal `sb` of type `SampleBuf`
-through default audio output device using the `PortAudio` package,
-after scaling the data to have values in `(-1,1)`.
-"""
-soundsc(sb::SampleBuf) = soundsc(sb.data, sb.samplerate)
-
+# support SampledSignals iff user has loaded that package
+function __init__()
+	@require SampledSignals = "bd7594eb-a658-542f-9e75-4c4d8908c167" include("sample-buf.jl")
+end
 
 end # module
