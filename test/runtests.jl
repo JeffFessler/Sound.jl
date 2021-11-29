@@ -12,7 +12,7 @@ using SampledSignals: SampleBuf
     sound(x, S) # specify sampling rate
     sound(y) # use default sampling rate of 8192 Hz
     sound([x y]) # stereo
-    soundsc(0.1*x) # scale
+    soundsc(0.1 * reshape(x,1,:), S) # scale and row vector
 
     sb = SampleBuf(x, S)
     sound(sb)
