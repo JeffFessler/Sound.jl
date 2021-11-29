@@ -52,7 +52,9 @@ both `sound` and `soundsc`
 also support the `SampleBuf` type
 in the
 [SampledSignals.jl](https://github.com/JuliaAudio/SampledSignals.jl)
-package.
+package,
+via
+[Requires.jl](https://github.com/JuliaPackaging/Requires.jl).
 That type carries the sampling rate
 along with the signal data,
 which is attractive
@@ -60,7 +62,7 @@ compared to having two separate variables.
 
 ```julia
 using Sound
-using SampledSignals: SampleBuf
+using SampledSignals: SampleBuf # you may need to add this package
 S = 8192 # sampling rate in Hz
 x = 0.7*cos.(2pi*(1:S÷2)*440/S)
 y = 0.8*sin.(2pi*(1:S÷2)*660/S)
