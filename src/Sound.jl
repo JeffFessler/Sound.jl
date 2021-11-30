@@ -1,15 +1,17 @@
 """
     Sound
-Module that exports the `sound` method.
+Module that exports `sound` and `soundsc` methods for audio playback.
 """
 module Sound
 
 using PortAudio: PortAudioStream, write
 using Requires: @require
+import SignalBase: framerate
 
 export sound, soundsc
 
 
+# fallback
 framerate(x::Any) = error("The signal you are trying to play as a sound ",
  "does not have a known sampling rate. ",
  "Consider wrapping in a `SampleBuf` or defining `framerate(x::MyType)`")

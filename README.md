@@ -21,7 +21,6 @@ and
 [`soundsc`](https://www.mathworks.com/help/matlab/ref/soundsc.html)
 to facilitate code migration.
 
-
 ## Getting started
 
 ```julia
@@ -45,6 +44,14 @@ soundsc([x y], S) # scale to unit amplitude
 See the
 [documentation](https://jefffessler.github.io/Sound.jl/stable).
 
+
+Matlab's `autoplayer` has the same arguments as `sound`
+so you can type
+`autoplayer = sound`
+and then call
+`autoplayer(x, S)`
+if desired,
+albeit without any of other features of `autoplayer`.
 
 As a nod towards the Julia way of doing things,
 both `sound` and `soundsc`
@@ -74,6 +81,16 @@ soundsc(sb) # scale to maximum volume
 ### Compatibility
 
 Tested with Julia ≥ 1.6.
+
+
+### Caveats
+
+Because Julia code is compiled,
+the first time you call an audio function
+the sound can be jittery.
+Subsequent calls
+(with the same argument types)
+usually work as expected.
 
 
 ### Related packages
