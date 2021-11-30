@@ -77,13 +77,25 @@ sound(sb)
 soundsc(sb) # scale to maximum volume
 ```
 
+## Audio recording
 
-### Compatibility
+There is also a simple `record` method here
+for recording from the default microphone.
+It returns a Vector of the sample data
+and the audio system default sampling rate.
+
+```julia
+using Sound: record
+data, S = record(4) # record 4 seconds of audio data
+```
+
+
+## Compatibility
 
 Tested with Julia ≥ 1.6.
 
 
-### Caveats
+## Caveats
 
 Because Julia code is compiled,
 the first time you call an audio function
@@ -92,8 +104,16 @@ Subsequent calls
 (with the same argument types)
 usually work as expected.
 
+On MacOS, if you run Julia from an xterm in XQuartz,
+then (at least as of XQuartz v2.8.1)
+no audio will be recorded
+because XQuartz does not ask for permission
+to access the microphone.
+Running Julia within the Terminal app is required
+because Terminal will properly request microphone permissions.
 
-### Related packages
+
+## Related packages
 
 * https://github.com/haberdashPI/SignalBase.jl
   supports a `framerate` method that serves as the default sampling rate here.
