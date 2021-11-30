@@ -1,7 +1,7 @@
 # runtests.jl
 
 using Test: @test, @testset, @test_throws, detect_ambiguities
-using Sound # sound, soundsc
+using Sound # sound, soundsc, record
 using SampledSignals: SampleBuf
 
 @testset "Sound" begin
@@ -21,4 +21,11 @@ using SampledSignals: SampleBuf
     @test_throws String sound(ones(5,3), S) # array size
 
     @test isempty(detect_ambiguities(Sound))
+end
+
+
+@testset "record" begin
+	tmp, S = record(0.001)
+	@test S isa Real
+	@test tmp isa Vector
 end
