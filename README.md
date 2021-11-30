@@ -21,7 +21,6 @@ and
 [`soundsc`](https://www.mathworks.com/help/matlab/ref/soundsc.html)
 to facilitate code migration.
 
-
 ## Getting started
 
 ```julia
@@ -37,15 +36,22 @@ using Sound
 S = 8192 # sampling rate in Hz
 x = 0.7*cos.(2pi*(1:S÷2)*440/S)
 y = 0.8*sin.(2pi*(1:S÷2)*660/S)
-sound(x, S) # specify sampling rate
-sound(y) # use default sampling rate of 8192 Hz
-sound([x y]) # stereo
-soundsc([x y], S) # scale to maximum volume
+sound(x, S) # monophonic
+sound([x y], S) # stereo
+soundsc([x y], S) # scale to unit amplitude
 ```
 
 See the
 [documentation](https://jefffessler.github.io/Sound.jl/stable).
 
+
+Matlab's `autoplayer` has the same arguments as `sound`
+so you can type
+`autoplayer = sound`
+and then call
+`autoplayer(x, S)`
+if desired,
+albeit without any of other features of `autoplayer`.
 
 As a nod towards the Julia way of doing things,
 both `sound` and `soundsc`
@@ -77,10 +83,26 @@ soundsc(sb) # scale to maximum volume
 Tested with Julia ≥ 1.6.
 
 
+### Caveats
+
+Because Julia code is compiled,
+the first time you call an audio function
+the sound can be jittery.
+Subsequent calls
+(with the same argument types)
+usually work as expected.
+
+
 ### Related packages
 
+* https://github.com/haberdashPI/SignalBase.jl
+  supports a `framerate` method that serves as the default sampling rate here.
+* https://github.com/haberdashPI/SignalOperators.jl
+  has useful audio processing operations.
 * https://github.com/dancasimiro/WAV.jl
   has a similar `wavplay` function
+* https://github.com/JuliaAudio
+  has a collection of audio packages.
 * https://github.com/JuliaAudio/PortAudio.jl  
   Currently, the `sound` function here is just a wrapper
   around functions in this package.

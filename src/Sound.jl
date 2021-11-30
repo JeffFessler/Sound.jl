@@ -1,31 +1,38 @@
 """
     Sound
-Module that exports the `sound` method.
+Module that exports `sound` and `soundsc` methods for audio playback.
 """
 module Sound
 
 using PortAudio: PortAudioStream, write
 using Requires: @require
+import SignalBase: framerate
 
 export sound, soundsc
 
 
+# fallback
+framerate(x::Any) = error("The signal you are trying to play as a sound ",
+ "does not have a known sampling rate. ",
+ "Consider wrapping in a `SampleBuf` or defining `framerate(x::MyType)`")
+
+
 """
-    sound(x::AbstractVector, S::Real = 8192)
+    sound(x::AbstractVector, S::Real = framerate(x))
 Play monophonic audio signal `x` at sampling rate `S` samples per second
 through default audio output device using the `PortAudio` package.
-Default sampling rate is `S = 8192` samples per second.
+Caller must specify `S` unless a `framerate` method is defined for `x`.
 """
-sound(x::AbstractVector, S::Real = 8192) = sound(reshape(x, :, 1), S)
+sound(x::AbstractVector, S::Real = framerate(x)) = sound(reshape(x, :, 1), S)
 
 
 """
-    sound(x::AbstractMatrix, S::Real = 8192)
+    sound(x::AbstractMatrix, S::Real = framerate(x))
 Play stereo audio signal `x` at sampling rate `S` samples per second
 through default audio output device using the `PortAudio` package.
-Default sampling rate is `S = 8192` samples per second.
+Caller must specify `S` unless a `framerate` method is defined for `x`.
 """
-function sound(x::AbstractMatrix, S::Real = 8192)
+function sound(x::AbstractMatrix, S::Real = framerate(x))
     if size(x,1) == 1 # row "vector"
         x = vec(x) # convenience
     end
@@ -37,14 +44,10 @@ end
 
 
 """
-    soundsc(x, S::Real = 8192)
-Play mono or stereo audio signal `x`
-at sampling rate `S` samples per second
-through default audio output device using the `PortAudio` package,
-after scaling `x` to have values in `(-1,1)`.
-Default sampling rate is `S = 8192` samples per second.
+    soundsc(x, S::Real = framerate(x))
+Call `sound` after scaling `x` to have values in `(-1,1)`.
 """
-soundsc(x::AbstractArray, S::Real = 8192) =
+soundsc(x::AbstractArray, S::Real = framerate(x)) =
     sound(x * prevfloat(1.0) / maximum(abs, x), S)
 
 

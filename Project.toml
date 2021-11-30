@@ -6,6 +6,7 @@ version = "0.1.0"
 [deps]
 PortAudio = "80ea8bcb-4634-5cb3-8ee8-a132660d1d2d"
 Requires = "ae029012-a4dd-5104-9daa-d747884805df"
+SignalBase = "00c44e92-20f5-44bc-8f45-a1dcef76ba38"
 
 [compat]
 PortAudio = "1.1"
