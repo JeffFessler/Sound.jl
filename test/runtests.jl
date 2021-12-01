@@ -3,6 +3,7 @@
 using Test: @test, @testset, @test_throws, detect_ambiguities
 using Sound # sound, soundsc, record
 using SampledSignals: SampleBuf
+using PortAudio: devices
 
 @testset "Sound" begin
 
@@ -25,7 +26,11 @@ end
 
 
 @testset "record" begin
-	tmp, S = record(0.001)
-	@test S isa Real
-	@test tmp isa Vector
+    if isempty(devices())
+        @test nothing == record(0.001)
+    else
+        data, S = record(0.001)
+        @test S isa Real
+        @test data isa Vector
+    end
 end
