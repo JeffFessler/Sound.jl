@@ -1,6 +1,6 @@
 # soundsc.jl
 
-using PortAudio: PortAudioStream, write
+using PortAudio: PortAudioStream, write, devices
 using Requires: @require
 import SignalBase: framerate
 
@@ -33,6 +33,9 @@ function sound(x::AbstractMatrix, S::Real = framerate(x))
         x = vec(x) # convenience
     end
     size(x,2) ≤ 2 || throw("size(x,2) = $(size(x,2)) is too many channels")
+
+    isempty(devices()) && (@warn("No audio devices."); return nothing)
+
     PortAudioStream(0, 2; samplerate=Float64(S)) do stream
         write(stream, x)
     end
