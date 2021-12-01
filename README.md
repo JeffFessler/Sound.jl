@@ -21,11 +21,14 @@ and
 [`soundsc`](https://www.mathworks.com/help/matlab/ref/soundsc.html)
 to facilitate code migration.
 
+
 ## Getting started
 
+`Sound` is a registered package,
+so installation is easy:
+
 ```julia
-using Pkg
-Pkg.add("Sound")
+import Pkg; Pkg.add("Sound")
 ```
 
 
@@ -45,13 +48,15 @@ See the
 [documentation](https://jefffessler.github.io/Sound.jl/stable).
 
 
-Matlab's `autoplayer` has the same arguments as `sound`
+Matlab's
+[`audioplayer`](https://www.mathworks.com/help/matlab/ref/audioplayer.html)
+has the same arguments as `sound`,
 so you can type
-`autoplayer = sound`
+`audioplayer = sound`
 and then call
-`autoplayer(x, S)`
+`audioplayer(x, S)`
 if desired,
-albeit without any of other features of `autoplayer`.
+albeit without any of other features of `audioplayer`.
 
 As a nod towards the Julia way of doing things,
 both `sound` and `soundsc`
@@ -76,6 +81,7 @@ sb = SampleBuf([x y], S) # stereo data
 sound(sb)
 soundsc(sb) # scale to maximum volume
 ```
+
 
 ## Audio recording
 
