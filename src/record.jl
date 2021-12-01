@@ -1,7 +1,7 @@
 # record.jl
 # elementary audio recording utility function
 
-using PortAudio: PortAudioStream, read
+using PortAudio: PortAudioStream, read, devices
 
 export record
 
@@ -29,6 +29,8 @@ function record(
     chat::Bool=true,
     print::Function = (x) -> printstyled(x * "\n"; color=:blue),
 )
+
+    isempty(devices()) && (@warn("No audio devices."); return nothing)
 
     PortAudioStream(args...) do stream
         S = stream.sample_rate
