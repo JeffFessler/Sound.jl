@@ -17,6 +17,10 @@ if !isempty(devices())
     tmp = @inferred Sound.pick_output( ; io_in, io_out)
     @test tmp === dev
 
+    io_in = IOBuffer("\n")
+    tmp = @inferred Sound.pick_output( ; io_in, io_out)
+    @test tmp === dev
+
     io_in = IOBuffer("$index")
     sound(:pick, randn(500), 1000; io_in, io_out)
     sound(index, randn(500), 1000)
