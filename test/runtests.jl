@@ -1,12 +1,36 @@
 # runtests.jl
 
-using Test: @test, @testset, @test_throws, detect_ambiguities
-using Sound # sound, soundsc, record
+using Test: @test, @testset, @test_throws, @inferred, detect_ambiguities
+using Sound # sound, soundsc, record, pick_output
 using SampledSignals: SampleBuf
-using PortAudio: devices
+using PortAudio: devices, PortAudioDevice
+
+if isempty(devices())
+    @warn "No devices so no tests on this OS."
+else
+
+@testset "output" begin
+    dev = @inferred sound(:first)
+    @test dev isa PortAudioDevice
+
+    index = findfirst(==(dev), devices())
+    io_out = IOBuffer()
+    io_in = IOBuffer("$index")
+    tmp = @inferred Sound.pick_output( ; io_in, io_out)
+    @test tmp === dev
+
+    io_in = IOBuffer("\n")
+    tmp = @inferred Sound.pick_output( ; io_in, io_out)
+    @test tmp === dev
+
+    io_in = IOBuffer("$index")
+    sound(:pick, randn(500), 1000; io_in, io_out)
+    sound(index, randn(500), 1000)
+    @test_throws String sound(0, randn(500), 1000)
+end
+
 
 @testset "Sound" begin
-
     S = 8192 # sampling rate in Hz
     x = 0.8 * cos.(2pi*(1:800)*440/S)
     y = 0.7 * sin.(2pi*(1:800)*660/S)
@@ -34,3 +58,5 @@ end
         @test data isa Vector
     end
 end
+
+end # !isempty(devices())
