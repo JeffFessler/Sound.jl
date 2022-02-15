@@ -1,7 +1,7 @@
 name = "Sound"
 uuid = "afe32e48-2646-410f-a1df-ae97debbc86b"
 authors = ["Jeff Fessler <fessler@umich.edu>"]
-version = "0.2.0"
+version = "0.3.0"
 
 [deps]
 PortAudio = "80ea8bcb-4634-5cb3-8ee8-a132660d1d2d"
@@ -10,6 +10,6 @@ SignalBase = "00c44e92-20f5-44bc-8f45-a1dcef76ba38"
 
 [compat]
 PortAudio = "1.1"
-Requires = "1.1"
+Requires = "1"
 SignalBase = "0.1"
 julia = "1.6"
