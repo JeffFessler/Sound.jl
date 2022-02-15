@@ -5,6 +5,8 @@ using Sound # sound, soundsc, record, pick_output
 using SampledSignals: SampleBuf
 using PortAudio: devices, PortAudioDevice
 
+if !isempty(devices())
+
 @testset "output" begin
     dev = @inferred sound(:first)
     @test dev isa PortAudioDevice
@@ -50,3 +52,5 @@ end
         @test data isa Vector
     end
 end
+
+end # !isempty(devices())
