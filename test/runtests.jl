@@ -5,7 +5,9 @@ using Sound # sound, soundsc, record, pick_output
 using SampledSignals: SampleBuf
 using PortAudio: devices, PortAudioDevice
 
-if !isempty(devices())
+if isempty(devices())
+    @warn "No devices so no tests on this OS."
+else
 
 @testset "output" begin
     dev = @inferred sound(:first)
