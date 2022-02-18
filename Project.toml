@@ -1,7 +1,7 @@
 name = "Sound"
 uuid = "afe32e48-2646-410f-a1df-ae97debbc86b"
 authors = ["Jeff Fessler <fessler@umich.edu>"]
-version = "0.3.0"
+version = "0.4.0"
 
 [deps]
 PortAudio = "80ea8bcb-4634-5cb3-8ee8-a132660d1d2d"

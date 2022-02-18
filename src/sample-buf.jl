@@ -1,4 +1,4 @@
-# sample-buf.jl 
+# sample-buf.jl
 
 using .SampledSignals: write, SampleBuf
 

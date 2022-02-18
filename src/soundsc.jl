@@ -1,6 +1,7 @@
 # soundsc.jl
 
 using PortAudio: PortAudioStream, PortAudioDevice, write, devices
+import PortAudio as PA # terminate, initialize, get_default_output_index
 using Requires: @require
 import SignalBase: framerate
 
@@ -61,11 +62,15 @@ sound(::Symbol,
 
 
 """
-    sound(:first))
-Return first audio device that has output channels.
+    get_default_output_device()
+Determine current system-wide default output audio device.
 """
-sound(::Symbol) =
-    first(filter(x -> x.output_bounds.max_channels > 0, devices()))
+function get_default_output_device()
+    PA.terminate()
+    PA.initialize()
+    isempty(devices()) && throw("No audio devices.")
+    return devices()[1 + PA.get_default_output_index()]
+end
 
 
 """
@@ -95,7 +100,7 @@ Caller must specify `S` unless a `framerate` method is defined for `x`.
 function sound(
     x::AbstractMatrix,
     S::Real = framerate(x),
-    output_device::PortAudioDevice = sound(:first),
+    output_device::PortAudioDevice = get_default_output_device(),
 )
     if size(x,1) == 1 # row "vector"
         x = vec(x) # convenience
