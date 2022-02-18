@@ -5,12 +5,14 @@ using Sound # sound, soundsc, record, pick_output
 using SampledSignals: SampleBuf
 using PortAudio: devices, PortAudioDevice
 
+# include("aqua.jl") # fails in Interval, Unitful ...
+
 if isempty(devices())
     @warn "No devices so no tests on this OS."
 else
 
 @testset "output" begin
-    dev = @inferred sound(:first)
+    dev = @inferred Sound.get_default_output_device()
     @test dev isa PortAudioDevice
 
     index = findfirst(==(dev), devices())
@@ -32,8 +34,8 @@ end
 
 @testset "Sound" begin
     S = 8192 # sampling rate in Hz
-    x = 0.8 * cos.(2pi*(1:800)*440/S)
-    y = 0.7 * sin.(2pi*(1:800)*660/S)
+    x = 0.8 * cos.(2π*(1:800)*440/S)
+    y = 0.7 * sin.(2π*(1:800)*660/S)
     sound(x, S) # specify sampling rate
     @test_throws ErrorException sound(y) # unknown sampling rate
     sound([x y], S) # stereo
@@ -50,13 +52,12 @@ end
 
 
 @testset "record" begin
-    if isempty(devices())
-        @test nothing == record(0.001)
-    else
-        data, S = record(0.001)
-        @test S isa Real
-        @test data isa Vector
-    end
+    dev = @inferred Sound.get_default_input_device()
+    @test dev isa PortAudioDevice
+
+    data, S = record(0.001)
+    @test S isa Real
+    @test data isa Vector
 end
 
 end # !isempty(devices())
