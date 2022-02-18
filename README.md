@@ -2,20 +2,22 @@
 
 https://github.com/JeffFessler/Sound.jl
 
+[![docs-stable][docs-stable-img]][docs-stable-url]
+[![docs-dev][docs-dev-img]][docs-dev-url]
 [![action status][action-img]][action-url]
 [![pkgeval status][pkgeval-img]][pkgeval-url]
 [![codecov][codecov-img]][codecov-url]
+<!-- [![Aqua QA][aqua-img]][aqua-url] -->
 [![license][license-img]][license-url]
-[![docs-stable][docs-stable-img]][docs-stable-url]
-[![docs-dev][docs-dev-img]][docs-dev-url]
 [![code-style][code-blue-img]][code-blue-url]
 
 This Julia repo exports the functions
 `sound`
 and
 `soundsc`
-that play an audio signal through a computer's speakers.
-Their use is designed to be similar to that of Matlab commands
+that play an audio signal through a computer's audio output device,
+such as speakers or headphones.
+These functions are designed to be similar to that of Matlab commands
 [`sound`](https://www.mathworks.com/help/matlab/ref/sound.html)
 and
 [`soundsc`](https://www.mathworks.com/help/matlab/ref/soundsc.html)
@@ -82,11 +84,20 @@ sound(sb)
 soundsc(sb) # scale to maximum volume
 ```
 
+By default,
+the audio output is routed
+to the sound output device
+specified in system-wide settings,
+e.g., via "System Preferences" on a Mac.
+There is keyword option
+to override that setting.
+
 
 ## Audio recording
 
 There is also a simple `record` method here
-for recording from the default microphone.
+for recording from the system-wide default audio input device
+(typically a built-in microphone).
 It returns a Vector of the sample data
 and the audio system default sampling rate.
 
@@ -94,6 +105,9 @@ and the audio system default sampling rate.
 using Sound: record
 data, S = record(4) # record 4 seconds of audio data
 ```
+
+Again there is keyword argument
+for selecting the audio input device.
 
 
 ## Compatibility
@@ -156,3 +170,5 @@ because Terminal will properly request microphone permissions.
 [docs-dev-url]: https://JeffFessler.github.io/Sound.jl/dev
 [license-img]: http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat
 [license-url]: LICENSE
+[aqua-img]: https://img.shields.io/badge/Aqua.jl-%F0%9F%8C%A2-aqua.svg
+[aqua-url]: https://github.com/JuliaTesting/Aqua.jl
