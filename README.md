@@ -39,8 +39,8 @@ import Pkg; Pkg.add("Sound")
 ```julia
 using Sound
 S = 8192 # sampling rate in Hz
-x = 0.7*cos.(2pi*(1:S÷2)*440/S)
-y = 0.8*sin.(2pi*(1:S÷2)*660/S)
+x = 0.7*cos.(2π*(1:S÷2)*440/S)
+y = 0.8*sin.(2π*(1:S÷2)*660/S)
 sound(x, S) # monophonic
 sound([x y], S) # stereo
 soundsc([x y], S) # scale to unit amplitude
@@ -77,8 +77,8 @@ compared to having two separate variables.
 using Sound
 using SampledSignals: SampleBuf # you may need to add this package
 S = 8192 # sampling rate in Hz
-x = 0.7*cos.(2pi*(1:S÷2)*440/S)
-y = 0.8*sin.(2pi*(1:S÷2)*660/S)
+x = 0.7*cos.(2π*(1:S÷2)*440/S)
+y = 0.8*sin.(2π*(1:S÷2)*660/S)
 sb = SampleBuf([x y], S) # stereo data
 sound(sb)
 soundsc(sb) # scale to maximum volume
