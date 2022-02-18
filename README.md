@@ -7,9 +7,9 @@ https://github.com/JeffFessler/Sound.jl
 [![action status][action-img]][action-url]
 [![pkgeval status][pkgeval-img]][pkgeval-url]
 [![codecov][codecov-img]][codecov-url]
-<!-- [![Aqua QA][aqua-img]][aqua-url] -->
 [![license][license-img]][license-url]
 [![code-style][code-blue-img]][code-blue-url]
+<!-- [![Aqua QA][aqua-img]][aqua-url] -->
 
 This Julia repo exports the functions
 `sound`
