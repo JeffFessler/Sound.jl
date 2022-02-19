@@ -7,6 +7,8 @@ using PortAudio: devices, PortAudioDevice
 
 # include("aqua.jl") # fails in Interval, Unitful ...
 
+@show devices()
+
 if isempty(devices())
     @warn "No devices so no tests on this OS."
 else
