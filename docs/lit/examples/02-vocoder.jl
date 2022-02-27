@@ -7,7 +7,7 @@ This page illustrates the phase vocoder feature of the Julia package
 [`Sound`](https://github.com/JeffFessler/Sound.jl).
 
 This page was generated from a single Julia file:
-[02-vocoder.jl](@__REPO_ROOT_URL__/01-vocoder.jl).
+[02-vocoder.jl](@__REPO_ROOT_URL__/02-vocoder.jl).
 =#
 
 #md # In any such Julia documentation,
