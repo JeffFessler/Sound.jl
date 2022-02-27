@@ -15,4 +15,9 @@ function __init__()
     @require SampledSignals = "bd7594eb-a658-542f-9e75-4c4d8908c167" include("sample-buf.jl")
 end
 
+# Phase vocoder
+include("hann.jl")
+include("findpeaks.jl")
+include("phase_vocoder.jl")
+
 end # module
