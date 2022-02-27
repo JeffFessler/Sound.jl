@@ -1,0 +1,32 @@
+using Sound: soundsc
+using DSP: spectrogram
+S = 8192*2^2
+#S = 44100
+y = cos.(2π*400*(1:2S)/S) .* hann(2S)
+#y = [y; cos.(2π*600*(1:S)/S) .* hann(S)]
+P = S/300
+z = (2mod1.(1:S, P)/P .- 1) .* hann(S)
+z = cos.(2π*300*(1:S)/S).^3
+y = [y; z]
+x = phase_vocoder(y, S)
+sy = spectrogram(y / maximum(abs, y); fs=S)
+sx = spectrogram(x / maximum(abs, x); fs=S)
+using Plots: heatmap, plot, gui
+using MIRTjim: jim
+#jim(sx.time, sx.freq, sx.power, aspect_ratio=:auto,
+# xlabel="time", ylabel="freq")
+dB = x -> max(log10.(x), -10)
+fun = (s) -> jim(s.time, s.freq, dB.(s.power)', aspect_ratio=:auto,
+  ylims = (0,1000), color=:viridis, clim = (-10,0),
+  yticks = 0:200:1000, yflip=false,
+  xlabel="time", ylabel="freq")
+plot(fun(sx), fun(sy)), gui()
+#soundsc([y; x], S)
+
+
+
+#=
+using WAV: wavread
+x1, S = wavread("maple.wav")
+x2 = vocode(x1, S)
+=#
