@@ -18,5 +18,6 @@ end
 # Phase vocoder
 include("hann.jl")
 include("findpeaks.jl")
+include("phase_vocoder.jl")
 
 end # module

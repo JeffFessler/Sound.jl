@@ -67,3 +67,4 @@ end # !isempty(devices())
 
 include("hann.jl")
 include("findpeaks.jl")
+include("phase_vocoder.jl")
