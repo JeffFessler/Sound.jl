@@ -110,6 +110,18 @@ Again there is keyword argument
 for selecting the audio input device.
 
 
+## Phase vocoder
+
+Also exported is the function `phase_vocoder`
+that provides a Julia version
+of a
+[phase vocoder](https://en.wikipedia.org/wiki/Phase_vocoder),
+translated from
+[this Matlab code](https://sethares.engr.wisc.edu/vocoders/matlabphasevocoder.html)
+for audio time scaling.
+See the documentation for example use.
+
+
 ## Compatibility
 
 Tested with Julia ≥ 1.6.
