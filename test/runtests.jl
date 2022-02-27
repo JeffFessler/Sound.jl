@@ -63,3 +63,7 @@ end
 end
 
 end # !isempty(devices())
+
+
+include("hann.jl")
+include("findpeaks.jl")
