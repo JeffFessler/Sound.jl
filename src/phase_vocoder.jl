@@ -17,9 +17,10 @@ using FFTW: fft, ifft
 function phase_vocoder(
     y::AbstractMatrix{<:Real},
     sr::Real = framerate(y) ; # sampling rate (in Hz)
+    T::DataType = Float32,
     kwargs...
 )
-    mapslices(x -> phase_vocoder(x, sr; kwargs...), y, dims=1)
+    mapslices(x -> phase_vocoder(x, sr; T, kwargs...), y, dims=1)::Matrix{T}
 end
 
 
@@ -54,12 +55,13 @@ function phase_vocoder(
     eps_peak::Real = 0.005, # height of peaks
     nfft::Int = 2^12, # fft length
     win::AbstractVector{<:Real} = hann(nfft), # window
+    chat::Int = 0,
     T::DataType = Float32,
 )
 
     nfft2 = nfft ÷ 2
     N1 = min(length(x), Int(time*sr)) # length of processed audio in samples
-    tt = zeros(T, ceil(Int, hopout/hopin) * N1) # output
+    yy = zeros(T, ceil(Int, hopout/hopin) * N1) # output
     lenseg = floor(Int, (N1 - nfft) / hopin) # number of nfft segments to process
 
     ssf = sr * (0:nfft2) / nfft # frequency vector (k/N)*S
@@ -68,9 +70,9 @@ function phase_vocoder(
     dtin = hopin / sr # time advances dt per hop for input
     dtout = hopout / sr # time advances dt per hop for output
 
-    for k in 1:lenseg-1 # main loop - process each beat separately
-        mod1(k, 1000) == 1 && println(k) # show where we are
-        indin = (k-1) * hopin .+ (1:nfft)
+    for k in 0:lenseg-2 # main loop - process each beat separately
+        (chat > 0) && mod1(k, chat) == 1 && println(k) # show where we are
+        indin = k * hopin .+ (1:nfft)
 
         s = win .* x[indin] # get this frame and take FFT
         ffts = fft(s)
@@ -115,9 +117,9 @@ function phase_vocoder(
         wave = real(ifft(compl))
         phold .= ph
 
-        indout = round.(Int, ((k-1)*hopout+1):((k-1)*hopout+nfft))
-        tt[indout] .+= wave
+        indout = round.(Int, (k * hopout) .+ (1:nfft))
+        yy[indout] .+= wave
     end
 
-    return tt
+    return yy
 end
