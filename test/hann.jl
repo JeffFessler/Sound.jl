@@ -1,10 +1,11 @@
 # hann.jl
 
-using Sound: hann
-using DSP: hanning
+import Sound # hann
+import DSP # hanning
 using Test: @testset, @test
 
 @testset "hann" begin
-   @test hanning(8) ≈ hann(8)
-   @test hanning(9) ≈ hann(9)
+   for n in [8, 9]
+       @test Sound.hann(n) ≈ DSP.hanning(n+2)[2:end-1]
+   end
 end
