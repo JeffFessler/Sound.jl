@@ -72,7 +72,7 @@ function phase_vocoder(
 
     for k in 0:lenseg-2 # main loop - process each beat separately
         (chat > 0) && mod1(k, chat) == 1 && println(k) # show where we are
-        indin = floor.(Int, k * hopin .+ (1:nfft))
+        indin = round.(Int, k * hopin .+ (1:nfft))
 
         s = win .* x[indin] # get this frame and take FFT
         ffts = fft(s)

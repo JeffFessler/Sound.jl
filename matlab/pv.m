@@ -40,13 +40,16 @@ function output = pv(y, sr, hopin, hopout)
     lenseg=floor((min(leny,time*sr)-nfft)/hopin); % number of nfft segments to process
 
     ssf=sr*(0:nfft2)/nfft;                     % frequency vector
-    phold=zeros(stmo,nfft2+1); phadvance=zeros(stmo,nfft2+1);
-    outbeat=zeros(stmo,nfft); pold1=[]; pold2=[];
+    phold=zeros(stmo,nfft2+1);
+    phadvance=zeros(stmo,nfft2+1);
+    outbeat=zeros(stmo,nfft);
     dtin=hopin/sr;                             % time advances dt per hop for input
     dtout=hopout/sr;                           % time advances dt per hop for output
+
     for k=1:lenseg-1                           % main loop - process each beat separately
         if k/1000==round(k/1000), disp(k), end % for display so I know where we are
         indin=round(((k-1)*hopin+1):((k-1)*hopin+nfft));
+
         for sk=1:stmo                          % do L/R channels separately
             s=win.*y(sk,indin);                % get this frame and take FFT
             ffts=fft(s);

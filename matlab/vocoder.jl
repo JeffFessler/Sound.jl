@@ -43,6 +43,12 @@ end
     using DSP: spectrogram
 
     plot(yj - ym)
+    xlims = (5000,5400)
+p0 = plot(
+    plot(yj, marker=:circle; xlims),
+    plot(ym, marker=:circle; xlims),
+	layout=(1,2),
+); gui()
     sj = spectrogram(yj / maximum(abs, x); fs=S)
     sm = spectrogram(ym / maximum(abs, x); fs=S)
     dB = x -> max(log10.(x), -10)
@@ -53,5 +59,5 @@ end
         prompt = false,
     )
     sd = (; time=sj.time, freq=sj.freq, power=abs.(sj.power-sm.power))
-    jim(fun(sj), fun(sm), fun(sd)), gui()
-    soundsc([x; ym; yj], S) # listen to compare
+    plot(fun(sj), fun(sm), fun(sd), p0), gui()
+#   soundsc([x; ym; yj], S) # listen to compare
