@@ -109,6 +109,12 @@ data, S = record(4) # record 4 seconds of audio data
 Again there is keyword argument
 for selecting the audio input device.
 
+See
+[the examples/ directory](https://github.com/JeffFessler/Sound.jl/blob/main/examples/gtk-record.jl)
+for an example of creating a Record/Stop/Play GUI
+using
+[Gtk.jl](https://github.com/JuliaGraphics/Gtk.jl).
+
 
 ## Phase vocoder
 
