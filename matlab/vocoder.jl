@@ -47,7 +47,7 @@ end
 p0 = plot(
     plot(yj, marker=:circle; xlims),
     plot(ym, marker=:circle; xlims),
-	layout=(1,2),
+    layout=(1,2),
 ); gui()
     sj = spectrogram(yj / maximum(abs, x); fs=S)
     sm = spectrogram(ym / maximum(abs, x); fs=S)
