@@ -5,7 +5,7 @@ https://sethares.engr.wisc.edu/vocoders/matlabphasevocoder.html
 
 The comments in that file say that the Matlab version was modified
 from findPeaks.m by P. Moller-Nielson 28.3.03, pm-n.
-See http://www.daimi.au.dk/~pmn/sound
+See https://www.daimi.au.dk/~pmn/sound
 =#
 
 

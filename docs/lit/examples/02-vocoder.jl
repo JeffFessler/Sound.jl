@@ -15,7 +15,7 @@ This page was generated from a single Julia file:
 #md # using the "Edit on GitHub" link in the top right.
 
 #md # The corresponding notebook can be viewed in
-#md # [nbviewer](http://nbviewer.jupyter.org/) here:
+#md # [nbviewer](https://nbviewer.org/) here:
 #md # [`02-vocoder.ipynb`](@__NBVIEWER_ROOT_URL__/02-vocoder.ipynb),
 #md # and opened in [binder](https://mybinder.org/) here:
 #md # [`02-vocoder.ipynb`](@__BINDER_ROOT_URL__/02-vocoder.ipynb).
