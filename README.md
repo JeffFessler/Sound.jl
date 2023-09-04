@@ -130,7 +130,7 @@ See the documentation for example use.
 
 ## Compatibility
 
-Tested with Julia ≥ 1.6.
+Tested with Julia ≥ 1.9.
 
 
 ## Caveats

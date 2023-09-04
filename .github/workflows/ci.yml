@@ -23,10 +23,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: ['1.6', '1', 'nightly']
+        version: ['1', 'nightly']
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 #     - name: "Set up Julia"
       - uses: julia-actions/setup-julia@latest
         with:
