@@ -17,7 +17,7 @@ using FFTW: fft, ifft
 function phase_vocoder(
     y::AbstractMatrix{<:Real},
     sr::Real = framerate(y) ; # sampling rate (in Hz)
-    T::DataType = Float32,
+    T::Type{<:AbstractFloat} = Float32,
     kwargs...
 )
     mapslices(x -> phase_vocoder(x, sr; T, kwargs...), y, dims=1)::Matrix{T}
@@ -56,7 +56,7 @@ function phase_vocoder(
     nfft::Int = 2^12, # fft length
     win::AbstractVector{<:Real} = hann(nfft), # window
     chat::Int = 0,
-    T::DataType = Float32,
+    T::Type{<:AbstractFloat} = Float32,
 )
 
     nfft2 = nfft ÷ 2
