@@ -1,8 +1,6 @@
-#---------------------------------------------------------
-# # [Phase Vocoder](@id 02-vocoder)
-#---------------------------------------------------------
-
 #=
+# [Phase Vocoder](@id 02-vocoder)
+
 This page illustrates the phase vocoder feature of the Julia package
 [`Sound`](https://github.com/JeffFessler/Sound.jl).
 
@@ -10,15 +8,7 @@ This page was generated from a single Julia file:
 [02-vocoder.jl](@__REPO_ROOT_URL__/02-vocoder.jl).
 =#
 
-#md # In any such Julia documentation,
-#md # you can access the source code
-#md # using the "Edit on GitHub" link in the top right.
-
-#md # The corresponding notebook can be viewed in
-#md # [nbviewer](https://nbviewer.org/) here:
-#md # [`02-vocoder.ipynb`](@__NBVIEWER_ROOT_URL__/02-vocoder.ipynb),
-#md # and opened in [binder](https://mybinder.org/) here:
-#md # [`02-vocoder.ipynb`](@__BINDER_ROOT_URL__/02-vocoder.ipynb).
+#srcURL
 
 
 # ### Setup
@@ -37,9 +27,9 @@ using InteractiveUtils: versioninfo
 isinteractive() ? jim(:prompt, true) : prompt(:draw);
 
 
-# ### Overview
-
 #=
+## Overview
+
 Here we illustrate applying the phase vocoder
 to stretch time (by the default factor of 2).
 =#
