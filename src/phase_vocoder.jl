@@ -42,7 +42,7 @@ To slow down a comparable amount, choose `hopin = 161.3333`, `hopout = 242`.
 * `eps_peak::Real = 0.005` : minimum height of peaks
 * `nfft::Int = 2^12` : fft length
 * `win::AbstractVector{<:Real} = hann(nfft)` : window
-* `T::DataType = Float32` : data type
+* `T::Type = Float32` : data type
 """
 function phase_vocoder(
     x::AbstractVector{<:Real},
