@@ -1,8 +1,6 @@
-#---------------------------------------------------------
-# # [Sound overview](@id 01-overview)
-#---------------------------------------------------------
-
 #=
+# [Sound overview](@id 01-overview)
+
 This page illustrates the Julia package
 [`Sound`](https://github.com/JeffFessler/Sound.jl).
 
@@ -10,16 +8,7 @@ This page was generated from a single Julia file:
 [01-overview.jl](@__REPO_ROOT_URL__/01-overview.jl).
 =#
 
-#md # In any such Julia documentation,
-#md # you can access the source code
-#md # using the "Edit on GitHub" link in the top right.
-
-#md # The corresponding notebook can be viewed in
-#md # [nbviewer](https://nbviewer.org/) here:
-#md # [`01-overview.ipynb`](@__NBVIEWER_ROOT_URL__/01-overview.ipynb),
-#md # and opened in [binder](https://mybinder.org/) here:
-#md # [`01-overview.ipynb`](@__BINDER_ROOT_URL__/01-overview.ipynb).
-
+#srcURL
 
 # ### Setup
 
@@ -30,10 +19,12 @@ using SampledSignals: SampleBuf
 using InteractiveUtils: versioninfo
 
 
-# ### Overview
+#=
+### Overview
 
-# The primary purpose of this package, at least initially,
-# was to provide a simple way to hear audio signals in Julia.
+The primary purpose of this package, at least initially,
+was to provide a simple way to hear audio signals in Julia.
+=#
 
 S = 8192 # sampling rate in Hz
 x = 0.7*cos.(2π*(1:S÷2)*440/S)

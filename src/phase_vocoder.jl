@@ -17,7 +17,7 @@ using FFTW: fft, ifft
 function phase_vocoder(
     y::AbstractMatrix{<:Real},
     sr::Real = framerate(y) ; # sampling rate (in Hz)
-    T::DataType = Float32,
+    T::Type{<:AbstractFloat} = Float32,
     kwargs...
 )
     mapslices(x -> phase_vocoder(x, sr; T, kwargs...), y, dims=1)::Matrix{T}
@@ -42,7 +42,7 @@ To slow down a comparable amount, choose `hopin = 161.3333`, `hopout = 242`.
 * `eps_peak::Real = 0.005` : minimum height of peaks
 * `nfft::Int = 2^12` : fft length
 * `win::AbstractVector{<:Real} = hann(nfft)` : window
-* `T::DataType = Float32` : data type
+* `T::Type = Float32` : data type
 """
 function phase_vocoder(
     x::AbstractVector{<:Real},
@@ -56,7 +56,7 @@ function phase_vocoder(
     nfft::Int = 2^12, # fft length
     win::AbstractVector{<:Real} = hann(nfft), # window
     chat::Int = 0,
-    T::DataType = Float32,
+    T::Type{<:AbstractFloat} = Float32,
 )
 
     nfft2 = nfft ÷ 2
