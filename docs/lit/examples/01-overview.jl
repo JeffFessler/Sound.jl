@@ -3,9 +3,6 @@
 
 This page illustrates the Julia package
 [`Sound`](https://github.com/JeffFessler/Sound.jl).
-
-This page was generated from a single Julia file:
-[01-overview.jl](@__REPO_ROOT_URL__/01-overview.jl).
 =#
 
 #srcURL
@@ -29,31 +26,22 @@ was to provide a simple way to hear audio signals in Julia.
 S = 8192 # sampling rate in Hz
 x = 0.7*cos.(2π*(1:S÷2)*440/S)
 y = 0.8*sin.(2π*(1:S÷2)*660/S)
-sound(x, S) # monophonic
+isinteractive() && sound(x, S) # monophonic
 
 # stereo:
-sound([x y], S)
+isinteractive() && sound([x y], S)
 
 # scale to unit amplitude:
-soundsc([x y], S)
+isinteractive() && soundsc([x y], S)
 
 
 # Using `SampleBuf` may provide some convenience.
 
 S = 8192 # sampling rate in Hz
-x = 0.7*cos.(2π*(1:S÷2)*440/S)
-y = 0.8*sin.(2π*(1:S÷2)*660/S)
+x = 0.7 * cos.(2π*(1:S÷2)*440/S)
+y = 0.8 * sin.(2π*(1:S÷2)*660/S)
 sb = SampleBuf([x y], S) # stereo data
-sound(sb)
+isinteractive() && sound(sb)
 
 
-# ### Reproducibility
-
-# This page was generated with the following version of Julia:
-
-io = IOBuffer(); versioninfo(io); split(String(take!(io)), '\n')
-
-
-# And with the following package versions
-
-import Pkg; Pkg.status()
+include("../../../inc/reproduce.jl")
