@@ -120,5 +120,8 @@ end
     soundsc(x, S::Real = framerate(x), args...; kwargs...)
 Call `sound` after scaling `x` to have values in `(-1,1)`.
 """
-soundsc(x::AbstractArray, S::Real = framerate(x), args...; kwargs...) =
-    sound(x * prevfloat(1.0) / maximum(abs, x), S, args...; kwargs...)
+function soundsc(x::AbstractArray, S::Real = framerate(x), args...; kwargs...)
+    smax = maximum(abs, x)
+    scale = smax == 0 ? 1 : prevfloat(1.0) / smax # do not normalize if all zero
+    sound(x * scale, S, args...; kwargs...)
+end
