@@ -1,0 +1,13 @@
+name = "Sound"
+uuid = "afe32e48-2646-410f-a1df-ae97debbc86b"
+authors = ["Jeff Fessler <fessler@umich.edu>"]
+version = "0.1.0"
+
+[deps]
+PortAudio = "80ea8bcb-4634-5cb3-8ee8-a132660d1d2d"
+SampledSignals = "bd7594eb-a658-542f-9e75-4c4d8908c167"
+
+[compat]
+julia = "1.6"
+PortAudio = "1.1"
+SampledSignals = "2.1"
